@@ -16,6 +16,13 @@ use Illuminate\Support\Facades\Facade;
  */
 abstract class EloquentTestCase extends \PHPunit_Framework_TestCase
 {
+	public static function setUpBeforeClass()
+	{
+		if (!class_exists('Schema')) {
+			class_alias('Illuminate\Support\Facades\Schema', 'Schema');
+		}
+	}
+
 	public function setUp()
 	{
 		$this->capsule = new \Illuminate\Database\Capsule\Manager;
@@ -47,7 +54,6 @@ abstract class EloquentTestCase extends \PHPunit_Framework_TestCase
 	protected function setUpFacades()
 	{
 		$this->app = $this->makeFakeApp();
-
 		Facade::setFacadeApplication($this->app);
 	}
 
