@@ -1,6 +1,7 @@
 {
 	"name": "anlutro/l4-testing",
 	"description": "Base PHPUnit classes for Laravel 4.",
+	"license": "MIT",
 	"authors": [
 		{
 			"name": "Andreas Lutro",

@@ -7,16 +7,18 @@
  * @package  testing
  */
 
+namespace c;
+
 use Illuminate\Support\Facades\Facade;
 
 /**
  * Abstract test case class for testing models using a test database.
  */
-abstract class EloquentTestCase extends PHPunit_Framework_TestCase
+abstract class EloquentTestCase extends \PHPunit_Framework_TestCase
 {
 	public function setUp()
 	{
-		$this->capsule = new Illuminate\Database\Capsule\Manager;
+		$this->capsule = new \Illuminate\Database\Capsule\Manager;
 		$this->capsule->addConnection($this->getDatabaseConfig());
 		$this->capsule->setAsGlobal();
 		$this->capsule->bootEloquent();
