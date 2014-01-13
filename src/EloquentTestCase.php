@@ -4,7 +4,7 @@
  *
  * @author   Andreas Lutro <anlutro@gmail.com>
  * @license  http://opensource.org/licenses/MIT
- * @package  testing
+ * @package  l4-testing
  */
 
 namespace c;
