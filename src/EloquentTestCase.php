@@ -21,6 +21,9 @@ abstract class EloquentTestCase extends \PHPunit_Framework_TestCase
 		if (!class_exists('Schema')) {
 			class_alias('Illuminate\Support\Facades\Schema', 'Schema');
 		}
+		if (!class_exists('Eloquent')) {
+			class_alias('Illuminate\Database\Eloquent\Model', 'Eloquent');
+		}
 	}
 
 	public function setUp()
