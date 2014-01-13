@@ -1,4 +1,4 @@
-# Laravel 4 Presenter
+# Laravel 4 Test classes
 Installation: `composer require anlutro/l4-testing`
 
 Pick the latest stable version from packagist or the GitHub tag list.
