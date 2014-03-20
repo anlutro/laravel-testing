@@ -1,4 +1,13 @@
 <?php
+/**
+ * Testing base classes
+ *
+ * @author   Andreas Lutro <anlutro@gmail.com>
+ * @license  http://opensource.org/licenses/MIT
+ * @package  l4-testing
+ */
+
+namespace c;
 
 /**
  * Test case for using a full-stack laravel application inside a package.
