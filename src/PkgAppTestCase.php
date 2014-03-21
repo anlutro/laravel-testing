@@ -7,7 +7,7 @@
  * @package  l4-testing
  */
 
-namespace c;
+namespace anlutro\LaravelTesting;
 
 /**
  * Test case for using a full-stack laravel application inside a package.
@@ -18,7 +18,7 @@ namespace c;
  * Add laravel/laravel to your package's require-dev, implement the abstract
  * getVendorPath method and you should be good to go.
  */
-abstract class PkgAppTestCase extends \c\L4TestCase
+abstract class PkgAppTestCase extends \anlutro\LaravelTesting\L4TestCase
 {
 	/**
 	 * Create the application.

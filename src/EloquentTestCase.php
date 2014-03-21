@@ -7,7 +7,7 @@
  * @package  l4-testing
  */
 
-namespace c;
+namespace anlutro\LaravelTesting;
 
 use Illuminate\Support\Facades\Facade;
 

@@ -7,7 +7,7 @@
  * @package  l4-testing
  */
 
-namespace c;
+namespace anlutro\LaravelTesting;
 
 /**
  * Abstract Laravel 4 TestCase with a lot of handy functions.

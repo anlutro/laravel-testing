@@ -13,7 +13,7 @@ use Mockery as m;
  * This test ensures that the EloquentTestCase class works by inserting and
  * then retrieving a stub model.
  */
-class EloquentTestCaseTest extends \c\EloquentTestCase
+class EloquentTestCaseTest extends \anlutro\LaravelTesting\EloquentTestCase
 {
 	protected function getMigrations()
 	{
