@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Facade;
  */
 abstract class EloquentTestCase extends \PHPunit_Framework_TestCase
 {
+	protected $enableEvents = false;
+	protected $enableCache = false;
+
 	public static function setUpBeforeClass()
 	{
 		if (!class_exists('Schema')) {
@@ -30,6 +33,20 @@ abstract class EloquentTestCase extends \PHPunit_Framework_TestCase
 	{
 		$this->capsule = new \Illuminate\Database\Capsule\Manager;
 		$this->capsule->addConnection($this->getDatabaseConfig());
+
+		if ($this->enableEvents) {
+			if (!isset($container)) $container = new \Illuminate\Container\Container;
+			$this->eventDispatcher = new \Illuminate\Events\Dispatcher($container);
+			$this->capsule->setEventDispatcher($this->eventDispatcher);
+		}
+
+		if ($this->enableCache) {
+			if (!isset($container)) $container = new \Illuminate\Container\Container;
+			$container['config'] = ['cache.driver' => 'array'];
+			$this->cacheManager = new \Illuminate\Cache\CacheManager($container);
+			$this->capsule->setCacheManager($this->cacheManager);
+		}
+
 		$this->capsule->setAsGlobal();
 		$this->capsule->bootEloquent();
 		$this->runMigrations('up');

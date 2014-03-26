@@ -8,11 +8,12 @@
  */
 
 /**
- * This test ensures that the EloquentTestCase class works by inserting and
- * then retrieving a stub model.
+ * Ensure that the cache can be used in the Eloquent test case.
  */
-class EloquentTestCaseTest extends \anlutro\LaravelTesting\EloquentTestCase
+class EloquentTestCaseCacheTest extends \anlutro\LaravelTesting\EloquentTestCase
 {
+	protected $enableCache = true;
+
 	protected function getMigrations()
 	{
 		return ['MigrationStub'];
@@ -20,10 +21,14 @@ class EloquentTestCaseTest extends \anlutro\LaravelTesting\EloquentTestCase
 
 	public function testInsertAndRetrieve()
 	{
-		$model = EloquentStub::create(['name' => 'foobar']);
-		$model = EloquentStub::find($model->getKey());
+		EloquentStub::create(['name' => 'foobar']);
+		$model = EloquentStub::query()
+			->where('name', '=', 'foobar')
+			->remember(1, 'cache_key')
+			->first();
 		$this->assertTrue($model->exists);
 		$this->assertEquals('foobar', $model->name);
 		$this->assertEquals(1, $model->id);
+		$this->assertTrue($this->cacheManager->has('cache_key'));
 	}
 }
