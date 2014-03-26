@@ -18,10 +18,14 @@ class EloquentTestCaseTest extends \anlutro\LaravelTesting\EloquentTestCase
 		return ['MigrationStub'];
 	}
 
+	public function getSeeders()
+	{
+		return ['SeederStub'];
+	}
+
 	public function testInsertAndRetrieve()
 	{
-		$model = EloquentStub::create(['name' => 'foobar']);
-		$model = EloquentStub::find($model->getKey());
+		$model = EloquentStub::first();
 		$this->assertTrue($model->exists);
 		$this->assertEquals('foobar', $model->name);
 		$this->assertEquals(1, $model->id);

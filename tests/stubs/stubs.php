@@ -20,3 +20,20 @@ class MigrationStub extends Illuminate\Database\Migrations\Migration
 		Schema::drop('eloquent_stubs');
 	}
 }
+
+class SeederStub extends Illuminate\Database\Seeder
+{
+	public function run()
+	{
+		EloquentStub::create(['name' => 'foobar']);
+		$this->call('OtherSeederStub');
+	}
+}
+
+class OtherSeederStub extends Illuminate\Database\Seeder
+{
+	public function run()
+	{
+		EloquentStub::create(['name' => 'barfoo']);
+	}
+}
