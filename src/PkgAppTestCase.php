@@ -23,7 +23,7 @@ abstract class PkgAppTestCase extends \anlutro\LaravelTesting\L4TestCase
 	/**
 	 * Create the application.
 	 *
-	 * @return Illuminate\Foundation\Application
+	 * @return \Illuminate\Foundation\Application
 	 */
 	public function createApplication()
 	{
@@ -60,6 +60,11 @@ abstract class PkgAppTestCase extends \anlutro\LaravelTesting\L4TestCase
 		$this->app->boot();
 	}
 
+	/**
+	 * Get a list of providers to register on top of the default ones.
+	 *
+	 * @return string[]
+	 */
 	protected function getExtraProviders()
 	{
 		return [];
