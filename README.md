@@ -1,4 +1,4 @@
-# Laravel 4 Test classes [![Build Status](https://travis-ci.org/anlutro/laravel-testing.png?branch=master)](https://travis-ci.org/anlutro/laravel-testing)
+# Laravel 4 Test classes [![Build Status](https://travis-ci.org/anlutro/laravel-testing.png?branch=master)](https://travis-ci.org/anlutro/laravel-testing) [![Latest Version](http://img.shields.io/github/tag/anlutro/laravel-testing.svg)](https://github.com/anlutro/laravel-testing/releases)
 Installation: `composer require anlutro/l4-testing`
 
 Pick the latest stable version from packagist or the GitHub tag list.
