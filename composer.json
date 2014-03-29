@@ -13,12 +13,12 @@
 		"laravel/framework": "~4.1"
 	},
 	"require-dev": {
-		"mockery/mockery": "dev-master"
+		"mockery/mockery": "dev-master",
+		"laravel/laravel": "~4.1"
 	},
 	"autoload": {
 		"psr-4": {
 			"anlutro\\LaravelTesting\\": "src/"
 		}
-	},
-	"minimum-stability": "stable"
+	}
 }

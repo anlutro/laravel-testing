@@ -9,6 +9,9 @@
 
 namespace anlutro\LaravelTesting;
 
+use Illuminate\Foundation\Application;
+
+
 /**
  * Test case for using a full-stack laravel application inside a package.
  *
@@ -29,10 +32,10 @@ abstract class PkgAppTestCase extends \anlutro\LaravelTesting\L4TestCase
 	{
 		$unitTesting = true;
 		$testEnvironment = 'testing';
-		$app = new Illuminate\Foundation\Application;
+		$app = new Application;
 		$env = $app->detectEnvironment(function() { return 'testing'; });
 		$app->bindInstallPaths(require $this->getVendorPath() . '/laravel/laravel/bootstrap/paths.php');
-		require Illuminate\Foundation\Application::getBootstrapFile();
+		require Application::getBootstrapFile();
 		return $app;
 	}
 
