@@ -43,6 +43,9 @@ abstract class EloquentTestCase extends PHPunit_Framework_TestCase
 		if (!class_exists('Seeder')) {
 			class_alias('Illuminate\Database\Seeder', 'Seeder');
 		}
+		if (!class_exists('DB')) {
+			class_alias('Illuminate\Support\Facades\DB', 'DB');
+		}
 	}
 
 	public function setUp()
