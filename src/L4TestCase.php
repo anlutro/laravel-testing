@@ -103,9 +103,7 @@ abstract class L4TestCase extends \Illuminate\Foundation\Testing\TestCase
 			throw new \InvalidArgumentException('$when must be "before" or "after"');
 		}
 
-		if ($route->getName()) {
-			$routeName = $route->getName();
-		} else {
+		if (!$routeName = $route->getName()) {
 			$routeName = $route->getActionName();
 		}
 
