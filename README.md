@@ -2,15 +2,16 @@
 Installation: `composer require anlutro/l4-testing`
 
 Pick the latest stable version from packagist or the GitHub tag list.
+    });
 
-### L4TestCase
-Basically just an improvement on the default Laravel TestCase.
+### PkgAppTestCase
+If you're writing an extensive package with routes, views, event listeners, view composers etc., this one is for you. This test case basically takes the default laravel installation, lets you add your package's service providers on top, and then you have a fully functional test case just like you would in a regular Laravel application - except it's in a package.
 
-    class MyTest extends \anlutro\LaravelTesting\L4TestCase { }
+    class MyTest extends \anlutro\LaravelTesting\PkgAppTestCase { }
 
-Set `protected $controller = 'MyController'` on your test class and you get access to some shorthands like `$this->getAction('show', [1])` which will expand into `$this->call('get', URL::action('MyController@show', [1]))`. This works similarily for `assertRedirectedToAction`.
+To make this test case work, you need to require the laravel/laravel package in your package's composer.json "require-dev". The test case has one abstract method, `getVendorPath`, which is what it sounds like.
 
-`$this->assertRouteHasFilter()` can be used to assert that the previously called route has a certain filter. Note that this only works with filters defined in routes.php, not filters defined in controller constructors.
+The method `getExtraProviders` should return an array of strings containing the fully qualified class names of any service providers your package requires to function in addition to the default Laravel ones.
 
 ### EloquentTestCase
 Standalone test for testing Eloquent models.
@@ -26,16 +27,15 @@ If you need some additional stuff to be available to facades (the hasher, for ex
     parent::setUp();
     $this->container->bindShared('hash', function() {
         return new \Illuminate\Hashing\BcryptHasher;
-    });
 
-### PkgAppTestCase
-If you're writing an extensive package with routes, views, event listeners, view composers etc., this one is for you. This test case basically takes the default laravel installation, lets you add your package's service providers on top, and then you have a fully functional test case just like you would in a regular Laravel application - except it's in a package.
+### L4TestCase
+Basically just an improvement on the default Laravel TestCase.
 
-    class MyTest extends \anlutro\LaravelTesting\PkgAppTestCase { }
+    class MyTest extends \anlutro\LaravelTesting\L4TestCase { }
 
-To make this test case work, you need to require the laravel/laravel package in your package's composer.json "require-dev". The test case has one abstract method, `getVendorPath`, which is what it sounds like.
+Set `protected $controller = 'MyController'` on your test class and you get access to some shorthands like `$this->getAction('show', [1])` which will expand into `$this->call('get', URL::action('MyController@show', [1]))`. This works similarily for `assertRedirectedToAction`.
 
-The method `getExtraProviders` should return an array of strings containing the fully qualified class names of any service providers your package requires to function in addition to the default Laravel ones.
+`$this->assertRouteHasFilter()` can be used to assert that the previously called route has a certain filter. Note that this only works with filters defined in routes.php, not filters defined in controller constructors.
 
 ## Contact
 Open an issue on GitHub if you have any problems or suggestions.
