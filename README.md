@@ -2,7 +2,6 @@
 Installation: `composer require anlutro/l4-testing`
 
 Pick the latest stable version from packagist or the GitHub tag list.
-    });
 
 ### PkgAppTestCase
 If you're writing an extensive package with routes, views, event listeners, view composers etc., this one is for you. This test case basically takes the default laravel installation, lets you add your package's service providers on top, and then you have a fully functional test case just like you would in a regular Laravel application - except it's in a package.
@@ -27,6 +26,7 @@ If you need some additional stuff to be available to facades (the hasher, for ex
     parent::setUp();
     $this->container->bindShared('hash', function() {
         return new \Illuminate\Hashing\BcryptHasher;
+    });
 
 ### L4TestCase
 Basically just an improvement on the default Laravel TestCase.
