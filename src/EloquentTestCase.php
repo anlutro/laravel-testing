@@ -81,21 +81,25 @@ abstract class EloquentTestCase extends PHPunit_Framework_TestCase
 	{
 		// create the IOC container and bind it to the facades.
 		$this->container = new Container;
+		$this->setUpContainer($this->container);
 		Facade::setFacadeApplication($this->container);
 
 		// create the capsule and bind it to the IOC container.
 		$this->capsule = new DatabaseCapsule($this->container);
+		$this->setUpCapsule($this->capsule);
 		$this->container['db'] = $this->capsule;
 		$this->capsule->addConnection($this->getDatabaseConfig());
 
 		if ($this->enableEvents) {
 			$this->eventDispatcher = new Dispatcher($this->container);
+			$this->setUpEventDispatcher($this->eventDispatcher);
 			$this->capsule->setEventDispatcher($this->eventDispatcher);
 		}
 
 		if ($this->enableCache) {
 			$this->container['config']['cache.driver'] = 'array';
 			$this->cacheManager = new CacheManager($this->container);
+			$this->setUpCacheManager($this->cacheManager);
 			$this->capsule->setCacheManager($this->cacheManager);
 		}
 
@@ -107,6 +111,34 @@ abstract class EloquentTestCase extends PHPunit_Framework_TestCase
 		$this->runMigrations('up');
 		$this->runSeeds();
 	}
+
+	/**
+	 * Set up the IoC container.
+	 *
+	 * @param \Illuminate\Container\Container $container
+	 */
+	protected function setUpContainer($container) {}
+
+	/**
+	 * Set up the database capsule.
+	 *
+	 * @param \Illuminate\Database\Capsule\Manager $capsule
+	 */
+	protected function setUpCapsule($capsule) {}
+
+	/**
+	 * Set up the event dispatcher.
+	 *
+	 * @param \Illuminate\Events\Dispatcher $eventDispatcher
+	 */
+	protected function setUpEventDispatcher($eventDispatcher) {}
+
+	/**
+	 * Set up the cache manager.
+	 *
+	 * @param \Illuminate\Cache\CacheManager $cacheManager
+	 */
+	protected function setUpCacheManager($cacheManager) {}
 
 	/**
 	 * Tear down the test case. This method is called after each test method.
