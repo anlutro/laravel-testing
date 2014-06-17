@@ -150,10 +150,10 @@ abstract class EloquentTestCase extends PHPunit_Framework_TestCase
 		$this->runMigrations('down');
 		Facade::setFacadeApplication(null);
 		Facade::clearResolvedInstances();
-		$this->eventDispatcher = null;
-		$this->cacheManager = null;
-		$this->capsule = null;
-		$this->container = null;
+		unset($this->eventDispatcher);
+		unset($this->cacheManager);
+		unset($this->capsule);
+		unset($this->container);
 	}
 
 	/**
@@ -168,7 +168,7 @@ abstract class EloquentTestCase extends PHPunit_Framework_TestCase
 		foreach($this->getMigrations() as $class) {
 			$migration = $this->container->make($class);
 			$migration->$direction();
-			$migration = null;
+			unset($migration);
 		}
 	}
 
@@ -183,6 +183,7 @@ abstract class EloquentTestCase extends PHPunit_Framework_TestCase
 			$seeder = $this->container->make($class);
 			$seeder->setContainer($this->container);
 			$seeder->run();
+			unset($seeder);
 		}
 	}
 
