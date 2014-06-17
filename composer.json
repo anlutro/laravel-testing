@@ -20,5 +20,6 @@
 		"psr-4": {
 			"anlutro\\LaravelTesting\\": "src/"
 		}
-	}
+	},
+	"prefer-stable": true
 }
