@@ -149,8 +149,7 @@ abstract class EloquentTestCase extends PHPunit_Framework_TestCase
 	{
 		foreach ($this->getSeeders() as $class) {
 			$seeder = $this->container->make($class);
-			// https://github.com/laravel/framework/pull/3995
-			// $seeder->setContainer($this->container);
+			$seeder->setContainer($this->container);
 			$seeder->run();
 		}
 	}
