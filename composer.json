@@ -10,15 +10,20 @@
 	],
 	"require": {
 		"php": ">=5.4.0",
-		"laravel/framework": "~4.1"
+		"laravel/framework": "~5.0"
 	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
-		"laravel/laravel": "~4.1"
+		"laravel/laravel": "dev-develop"
 	},
 	"autoload": {
 		"psr-4": {
 			"anlutro\\LaravelTesting\\": "src/"
+		}
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-develop": "0.3.x-dev"
 		}
 	},
 	"minimum-stability": "dev",

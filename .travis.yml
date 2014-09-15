@@ -7,9 +7,7 @@ php:
   - hhvm
 
 env:
-  - FRAMEWORK_VERSION="4.1.*" SKELETON_VERSION="4.1.*"
-  - FRAMEWORK_VERSION="4.2.*" SKELETON_VERSION="4.2.*"
-  - FRAMEWORK_VERSION="4.3.*@dev" SKELETON_VERSION="dev-develop@dev"
+  - FRAMEWORK_VERSION="5.0.*@dev" SKELETON_VERSION="dev-develop@dev"
 
 before_install:
   - composer require laravel/framework:${FRAMEWORK_VERSION} --no-update
