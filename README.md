@@ -28,6 +28,8 @@ If you need some additional stuff to be available to facades (the hasher, for ex
         return new \Illuminate\Hashing\BcryptHasher;
     });
 
+Keep in mind that while in a normal Laravel application, all facades are available in the global namespace. This is not the case in an isolated environment. Efforts have been made to make the most common Eloquent-related facades available globally, but some may not be. To solve this, simply look up the real name of the class in app/config/app.php under "aliases" and add a use statement at the top of your model class where you import this class.
+
 ### L4TestCase
 Basically just an improvement on the default Laravel TestCase.
 
