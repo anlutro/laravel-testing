@@ -34,6 +34,7 @@ abstract class PkgAppTestCase extends L4TestCase
 		$testEnvironment = 'testing';
 		$app = require $this->getVendorPath().'/laravel/laravel/bootstrap/app.php';
 		$env = $app->detectEnvironment(function() { return 'testing'; });
+		$app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
 		return $app;
 	}
 
