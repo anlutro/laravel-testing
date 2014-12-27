@@ -54,23 +54,11 @@ abstract class EloquentTestCase extends PHPunit_Framework_TestCase
 	protected $eventDispatcher;
 
 	/**
-	 * @var \Illuminate\Cache\CacheManager
-	 */
-	protected $cacheManager;
-
-	/**
 	 * Whether to enable events for the test.
 	 *
 	 * @var boolean
 	 */
 	protected $enableEvents = false;
-
-	/**
-	 * Whether to enable cache for the test.
-	 *
-	 * @var boolean
-	 */
-	protected $enableCache = false;
 
 	/**
 	 * Set up the test case. This method is called before every test method.
@@ -94,13 +82,6 @@ abstract class EloquentTestCase extends PHPunit_Framework_TestCase
 			$this->eventDispatcher = new Dispatcher($this->container);
 			$this->setUpEventDispatcher($this->eventDispatcher);
 			$this->capsule->setEventDispatcher($this->eventDispatcher);
-		}
-
-		if ($this->enableCache) {
-			$this->container['config']['cache.driver'] = 'array';
-			$this->cacheManager = new CacheManager($this->container);
-			$this->setUpCacheManager($this->cacheManager);
-			$this->capsule->setCacheManager($this->cacheManager);
 		}
 
 		// make the capsule available globally and enable eloquent
@@ -134,13 +115,6 @@ abstract class EloquentTestCase extends PHPunit_Framework_TestCase
 	protected function setUpEventDispatcher($eventDispatcher) {}
 
 	/**
-	 * Set up the cache manager.
-	 *
-	 * @param \Illuminate\Cache\CacheManager $cacheManager
-	 */
-	protected function setUpCacheManager($cacheManager) {}
-
-	/**
 	 * Tear down the test case. This method is called after each test method.
 	 *
 	 * If you override this method, remember to call parent::tearDown();
@@ -151,7 +125,6 @@ abstract class EloquentTestCase extends PHPunit_Framework_TestCase
 		Facade::setFacadeApplication(null);
 		Facade::clearResolvedInstances();
 		unset($this->eventDispatcher);
-		unset($this->cacheManager);
 		unset($this->capsule);
 		unset($this->container);
 	}

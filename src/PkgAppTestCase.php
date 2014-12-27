@@ -32,10 +32,8 @@ abstract class PkgAppTestCase extends L4TestCase
 	{
 		$unitTesting = true;
 		$testEnvironment = 'testing';
-		$app = new Application;
+		$app = require $this->getVendorPath().'/laravel/laravel/bootstrap/app.php';
 		$env = $app->detectEnvironment(function() { return 'testing'; });
-		$app->bindInstallPaths(require $this->getVendorPath() . '/laravel/laravel/bootstrap/paths.php');
-		require Application::getBootstrapFile();
 		return $app;
 	}
 
@@ -48,19 +46,13 @@ abstract class PkgAppTestCase extends L4TestCase
 	 */
 	protected function refreshApplication()
 	{
-		$this->app = $this->createApplication();
-
-		$this->client = $this->createClient();
-
-		$this->app->setRequestForConsoleEnvironment();
+		parent::refreshApplication();
 
 		// allow registration of extra service providers before boot is
 		// called, as some providers rely on others being loaded in time.
 		foreach ($this->getExtraProviders() as $provider) {
 			$this->app->register($provider);
 		}
-
-		$this->app->boot();
 	}
 
 	/**
