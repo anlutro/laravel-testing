@@ -96,7 +96,7 @@ abstract class EloquentTestCase extends PHPunit_Framework_TestCase
 			$this->capsule->setEventDispatcher($this->eventDispatcher);
 		}
 
-		if ($this->enableCache) {
+		if ($this->enableCache && method_exists($this->capsule, 'setCacheManager')) {
 			$this->container['config']['cache.driver'] = 'array';
 			$this->cacheManager = new CacheManager($this->container);
 			$this->setUpCacheManager($this->cacheManager);
@@ -134,7 +134,7 @@ abstract class EloquentTestCase extends PHPunit_Framework_TestCase
 	protected function setUpEventDispatcher($eventDispatcher) {}
 
 	/**
-	 * Set up the cache manager.
+	 * Set up the cache manager. Only works in 4.x.
 	 *
 	 * @param \Illuminate\Cache\CacheManager $cacheManager
 	 */
@@ -182,9 +182,20 @@ abstract class EloquentTestCase extends PHPunit_Framework_TestCase
 		foreach ($this->getSeeders() as $class) {
 			$seeder = $this->container->make($class);
 			$seeder->setContainer($this->container);
+			$seeder->setCommand($this->makeMockCommand());
 			$seeder->run();
 			unset($seeder);
 		}
+	}
+
+	protected function makeMockCommand()
+	{
+		$mock = \Mockery::mock('Illuminate\Console\Command');
+		$mock->shouldReceive('getOutput')
+			->andReturn(new \Symfony\Component\Console\Output\NullOutput)
+			->byDefault();
+		$mock->shouldIgnoreMissing();
+		return $mock;
 	}
 
 	/**

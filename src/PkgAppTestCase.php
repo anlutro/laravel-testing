@@ -32,10 +32,16 @@ abstract class PkgAppTestCase extends L4TestCase
 	{
 		$unitTesting = true;
 		$testEnvironment = 'testing';
-		$app = new Application;
-		$env = $app->detectEnvironment(function() { return 'testing'; });
-		$app->bindInstallPaths(require $this->getVendorPath() . '/laravel/laravel/bootstrap/paths.php');
-		require Application::getBootstrapFile();
+		if (version_compare(Application::VERSION, '5.0', '>=')) {
+			$app = require $this->getVendorPath().'/laravel/laravel/bootstrap/app.php';
+			$env = $app->detectEnvironment(function() { return 'testing'; });
+			$app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
+		} else {
+			$app = new Application;
+			$app->bindInstallPaths(require $this->getVendorPath() . '/laravel/laravel/bootstrap/paths.php');
+			require Application::getBootstrapFile();
+		}
+
 		return $app;
 	}
 
@@ -50,9 +56,10 @@ abstract class PkgAppTestCase extends L4TestCase
 	{
 		$this->app = $this->createApplication();
 
-		$this->client = $this->createClient();
-
-		$this->app->setRequestForConsoleEnvironment();
+		if (version_compare(Application::VERSION, '5.0', '<')) {
+			$this->client = $this->createClient();
+			$this->app->setRequestForConsoleEnvironment();
+		}
 
 		// allow registration of extra service providers before boot is
 		// called, as some providers rely on others being loaded in time.
@@ -60,7 +67,9 @@ abstract class PkgAppTestCase extends L4TestCase
 			$this->app->register($provider);
 		}
 
-		$this->app->boot();
+		if (version_compare(Application::VERSION, '5.0', '<')) {
+			$this->app->boot();
+		}
 	}
 
 	/**

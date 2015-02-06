@@ -7,12 +7,24 @@
  * @package  l4-testing
  */
 
+use Illuminate\Foundation\Application;
+
 /**
  * Ensure that the cache can be used in the Eloquent test case.
  */
 class EloquentTestCaseCacheTest extends \anlutro\LaravelTesting\EloquentTestCase
 {
 	protected $enableCache = true;
+
+	public function setUp()
+	{
+		// tearDown() is called even when the test is skipped, so call
+		// parent::setUp() to prevent errors
+		parent::setUp();
+		if (version_compare(Application::VERSION, '5.0', '>=')) {
+			$this->markTestSkipped('Caching not possible in 5.x');
+		}
+	}
 
 	protected function getMigrations()
 	{
