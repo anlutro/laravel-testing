@@ -33,6 +33,10 @@ abstract class PkgAppTestCase extends L4TestCase
 		$unitTesting = true;
 		$testEnvironment = 'testing';
 		if (version_compare(Application::VERSION, '5.0', '>=')) {
+			$vendorVendorDir = $this->getVendorPath().'/laravel/laravel/vendor';
+			if (!is_dir($vendorVendorDir)) {
+				mkdir($vendorVendorDir);
+			}
 			$app = require $this->getVendorPath().'/laravel/laravel/bootstrap/app.php';
 			$env = $app->detectEnvironment(function() { return 'testing'; });
 			$app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
