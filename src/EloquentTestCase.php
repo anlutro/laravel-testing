@@ -14,7 +14,7 @@ use Illuminate\Container\Container;
 use Illuminate\Database\Capsule\Manager as DatabaseCapsule;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Facades\Facade;
-use PHPunit_Framework_TestCase;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Set up class aliases if necessary, as these are quite often used in
@@ -36,7 +36,7 @@ if (!class_exists('DB')) {
 /**
  * Abstract test case class for testing models using a test database.
  */
-abstract class EloquentTestCase extends PHPunit_Framework_TestCase
+abstract class EloquentTestCase extends PHPUnit_Framework_TestCase
 {
 	/**
 	 * @var \Illuminate\Container\Container
