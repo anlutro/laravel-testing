@@ -15,9 +15,9 @@
 	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
-		"laravel/framework": ">=4.1.0 <6.0",
-		"laravel/laravel": ">=4.1.0 <6.0",
-		"phpunit/phpunit": ">=4 <6"
+		"laravel/framework": ">=4.1, <6",
+		"laravel/laravel": ">=4.1, <6",
+		"phpunit/phpunit": ">=4, <6"
 	},
 	"autoload": {
 		"psr-4": {
